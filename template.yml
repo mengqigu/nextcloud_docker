@@ -1,11 +1,10 @@
 version: '2'
 
-# user: www-data
 services:
    db:
      image: mysql:latest
      volumes:
-        - ./db_data:/var/lib/mysql
+        - ${DB_DATA_PATH}:/var/lib/mysql
      ports:
        - "3306:3306"
      restart: always
@@ -15,14 +14,16 @@ services:
        - MYSQL_USER=nextcloud
        - MYSQL_PASSWORD=nextcloud
    web:
-     # build and tag the current image based on php7.1-apache
+     # Image mengqigu/nextcloud_web is based on php7.1-apache's and
+     # official nextcloud image's docker file
      build: .
      image: mengqigu/nextcloud_web
+     user: root
      group_add:
        - www-data
      ports:
-     #  Expose ports. Specify both ports (HOST:CONTAINER),
+     #  Expose ports. Specify both ports (HOST:CONTAINER)
        - "8000:80"
        - "8001:443"
      volumes:
-       - ./src:/var/www/nextcloud
+       - ${NEXTCLOUD_PATH}:/var/www/nextcloud

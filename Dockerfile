@@ -46,12 +46,18 @@ RUN set -ex \
  && docker-php-ext-enable apcu redis memcached
 RUN a2enmod rewrite
 
-ENV NEXTCLOUD_VERSION 11.0.2
+ENV NEXTCLOUD_VERSION 12.0.0
 
 # Setup apache configurations for nextcloud
 COPY nextcloud.conf /etc/apache2/sites-available/
 RUN ln -s /etc/apache2/sites-available/nextcloud.conf /etc/apache2/sites-enabled/nextcloud.conf
 RUN a2enmod ssl
 
+# RUN mkdir -p /var/www/nextcloud ; chown -R www-data:www-data /var/www/nextcloud
+
 # Remove APT files
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Run apache from the foreground
+# No need for the official nc docker entrypoint.sh. This script only copy pastes source code to /var/www/html
+CMD ["apache2-foreground"]
