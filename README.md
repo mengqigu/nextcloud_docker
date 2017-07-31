@@ -1,7 +1,9 @@
-# Docker Compose Image for Nextcloud
+# Simple Docker Image for Nextcloud
 This is a simplified version of nextcloud docker image for local development,
 based on [the official Nextcloud docker image](https://github.com/nextcloud/docker)
 
+## Requirements
+You need to have `docker` and `docker-compose` installed on your system
 
 ## Set up
 1. Download nextcloud source code and set up the submodules following the
