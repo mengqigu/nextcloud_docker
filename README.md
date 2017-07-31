@@ -19,4 +19,5 @@ based on [the official Nextcloud docker image](https://github.com/nextcloud/dock
 6. Visit http://localhost:8000/nextcloud/ to set up your nextcloud instance
   * During setup, set the database name to "db" (without the quotes)
 
-__Note__: if you change the database password in `docker-compose.yml`, you may need to remove `/nextcloud/source/code/folder/` and `db_data` and re-do the setup process
+## Note
+If you change the database password in `docker-compose.yml`, you may need to remove `/nextcloud/source/code/folder/` and `db_data` and re-do the setup process
